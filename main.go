@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"gihub.com/biranjan/go_s3/s3"
+	"github.com/biranjan/go_s3/s_3"
 )
 
 func main() {
 	nameVar := "test"
 
-	fmt.Println("hello", s3.Hello(nameVar))
+	fmt.Println("hello", s_3.Hello(nameVar))
 }
