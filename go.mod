@@ -1,3 +1,3 @@
-module gihub.com/biranjan/s3_go
+module github.com/biranjan/go_s3
 
 go 1.14

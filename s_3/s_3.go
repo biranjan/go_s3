@@ -1,4 +1,4 @@
-package s3
+package s_3
 
 func Hello(filename string) string {
 	return filename
