@@ -25,7 +25,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	bucketname := "mytestbucketbi"
+	bucketname := os.Getenv("my_bucket") // bucket name
 
 	switch os.Args[1] {
 	case "upload":
