@@ -9,16 +9,26 @@ import (
 )
 
 func main() {
-	//nameVar := "test"
-	uploadFile := flag.String("upload", "", "file path to upload")
-	downloadFile := flag.String("download", "", "file name to download")
+
+	//flag.StringVar(&nameVar, "upload", "tst", "file path to upload")
+	//downloadFile := flag.String("download", "", "file name to download")
+	uploadCmd := flag.NewFlagSet("upload", flag.ExitOnError)
+	uploadFile := uploadCmd.String("filename", "", "filename")
+
+	downloadCmd := flag.NewFlagSet("download", flag.ExitOnError)
+	downloadFile := downloadCmd.String("filename", "", "filename")
+
+	if len(os.Args) < 2 {
+		fmt.Println("expected 'upload' or 'download' subcommands")
+		os.Exit(1)
+	}
 
 	switch os.Args[1] {
 	case "upload":
-		flag.Parse()
+		uploadCmd.Parse(os.Args[2:])
 		fmt.Println("hello", s_3.Hello(*uploadFile))
 	case "download":
-		flag.Parse()
+		downloadCmd.Parse(os.Args[2:])
 		fmt.Println("hello", s_3.HandleUpload(*downloadFile))
 	default:
 		fmt.Println("Expected 'download' or 'upload' command")
