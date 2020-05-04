@@ -29,10 +29,10 @@ func main() {
 	switch os.Args[1] {
 	case "upload":
 		uploadCmd.Parse(os.Args[2:])
-		fmt.Println("hello", s_3.HandleUpload(*uploadFile, bucketname))
+		fmt.Println("hello", s_3.HandleUpload(*uploadFile, bucketname, *uploadKey))
 	case "download":
 		downloadCmd.Parse(os.Args[2:])
-		fmt.Println("Upload", s_3.HandleUpload(*downloadFile, bucketname))
+		fmt.Println("Upload", s_3.HandleDownload(*downloadFile, bucketname))
 	default:
 		fmt.Println("Expected 'download' or 'upload' command")
 		os.Exit(1)

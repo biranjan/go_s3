@@ -67,7 +67,7 @@ func HandleUpload(filename string, bucketname string, keyname string) string {
 	return status
 }
 
-func handlerDownload(filename string, bucketname string) string {
+func HandleDownload(filename string, bucketname string) string {
 	status := "Successful"
 	f, err := os.Create(filename)
 	if err != nil {
