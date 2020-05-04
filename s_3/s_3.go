@@ -3,8 +3,7 @@ package s_3
 import (
 	"fmt"
 	"os"
-
-	"go_s3/s_3/config"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -13,7 +12,7 @@ import (
 )
 
 const (
-	AWS_S3_REGION = ""
+	AWS_S3_REGION = "eu-west-2"
 	AWS_S3_BUCKET = ""
 )
 
@@ -29,10 +28,11 @@ func ConnectAWS() *session.Session {
 
 // Function to print
 func Hello(filename string) string {
-	return filename
+	key := strings.Split(filename, "/")
+	return key[0]
 }
 
-var sess = config.ConnectAWS()
+var sess = ConnectAWS()
 
 // Function to test flag
 func HandleUpload(filename string, bucketname string) string {

@@ -23,13 +23,15 @@ func main() {
 		os.Exit(1)
 	}
 
+	bucketname := "mytestbucketbi"
+
 	switch os.Args[1] {
 	case "upload":
 		uploadCmd.Parse(os.Args[2:])
-		fmt.Println("hello", s_3.Hello(*uploadFile))
+		fmt.Println("hello", s_3.HandleUpload(*uploadFile, bucketname))
 	case "download":
 		downloadCmd.Parse(os.Args[2:])
-		fmt.Println("hello", s_3.HandleUpload(*downloadFile))
+		fmt.Println("Upload", s_3.HandleUpload(*downloadFile, bucketname))
 	default:
 		fmt.Println("Expected 'download' or 'upload' command")
 		os.Exit(1)
