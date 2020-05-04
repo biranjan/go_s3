@@ -14,6 +14,7 @@ func main() {
 	//downloadFile := flag.String("download", "", "file name to download")
 	uploadCmd := flag.NewFlagSet("upload", flag.ExitOnError)
 	uploadFile := uploadCmd.String("filename", "", "filename")
+	uploadKey := uploadCmd.String("key", "", "upload key for s3")
 
 	downloadCmd := flag.NewFlagSet("download", flag.ExitOnError)
 	downloadFile := downloadCmd.String("filename", "", "filename")

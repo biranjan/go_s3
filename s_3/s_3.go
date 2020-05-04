@@ -35,8 +35,15 @@ func Hello(filename string) string {
 var sess = ConnectAWS()
 
 // Function to test flag
-func HandleUpload(filename string, bucketname string) string {
+func HandleUpload(filename string, bucketname string, keyname string) string {
 	file, err := os.Open(filename)
+
+	if keyname == "" {
+		key := strings.Split(filename, "/")
+		keyname = key[len(key)-1]
+
+	}
+
 	status := "Successful"
 	if err != nil {
 		fmt.Println("error opening file: err:", err)
@@ -48,7 +55,7 @@ func HandleUpload(filename string, bucketname string) string {
 
 	_, err = uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(bucketname),
-		Key:    aws.String(filename),
+		Key:    aws.String(keyname),
 		Body:   file,
 	})
 	defer file.Close()
