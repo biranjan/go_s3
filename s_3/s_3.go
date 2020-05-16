@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -35,7 +36,9 @@ func Hello(filename string) string {
 var sess = ConnectAWS()
 
 // Function to test flag
-func HandleUpload(filename string, bucketname string, keyname string) string {
+func HandleUpload(filename string, bucketname string, keyname string, wg *sync.WaitGroup) string {
+
+	defer wg.Done()
 	file, err := os.Open(filename)
 
 	if keyname == "" {
@@ -67,7 +70,8 @@ func HandleUpload(filename string, bucketname string, keyname string) string {
 	return status
 }
 
-func HandleDownload(filename string, bucketname string, filepath string) string {
+func HandleDownload(filename string, bucketname string, filepath string, wg *sync.WaitGroup) string {
+	defer wg.Done()
 	status := "Successful"
 	f, err := os.Create(filepath)
 	if err != nil {
