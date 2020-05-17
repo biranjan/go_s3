@@ -70,12 +70,15 @@ func HandleUpload(filename string, bucketname string, keyname string, wg *sync.W
 	return status
 }
 
-func HandleDownload(filename string, bucketname string, filepath string, wg *sync.WaitGroup) string {
+func HandleDownload(filename string, bucketname string, filepath string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	status := "Successful"
+	if filepath == "" {
+		filepath = filename
+	}
 	f, err := os.Create(filepath)
 	if err != nil {
-		fmt.Println("error uploading file file: err:", err)
+		fmt.Println("error creating file: err:", err)
 		status = "failed"
 		os.Exit(1)
 	}
@@ -92,6 +95,6 @@ func HandleDownload(filename string, bucketname string, filepath string, wg *syn
 		fmt.Println("error downloading file: err:", err)
 		status = "failed"
 	}
-	return status
+	fmt.Println(filename, ":", status)
 
 }
