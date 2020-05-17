@@ -19,7 +19,7 @@ func main() {
 
 	downloadCmd := flag.NewFlagSet("download", flag.ExitOnError)
 	//downloadFile := downloadCmd.String("filename", "", "filename")
-	downloadPath := downloadCmd.String("filepath", "", "filename")
+	downloadPath := downloadCmd.String("filepath", "", "filename to store for single file")
 
 	if len(os.Args) < 2 {
 		fmt.Println("expected 'upload' or 'download' subcommands")

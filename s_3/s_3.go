@@ -17,6 +17,7 @@ const (
 	AWS_S3_BUCKET = ""
 )
 
+// ConnectAWS connect to aws
 func ConnectAWS() *session.Session {
 	sess, err := session.NewSession(
 		&aws.Config{
@@ -27,7 +28,7 @@ func ConnectAWS() *session.Session {
 	return sess
 }
 
-// Function to print
+// Hello test function to print
 func Hello(filename string) string {
 	key := strings.Split(filename, "/")
 	return key[0]
@@ -35,8 +36,8 @@ func Hello(filename string) string {
 
 var sess = ConnectAWS()
 
-// Function to test flag
-func HandleUpload(filename string, bucketname string, keyname string, wg *sync.WaitGroup) string {
+// HandleUpload function to upload local file to s3
+func HandleUpload(filename string, bucketname string, keyname string, wg *sync.WaitGroup) {
 
 	defer wg.Done()
 	file, err := os.Open(filename)
@@ -67,9 +68,10 @@ func HandleUpload(filename string, bucketname string, keyname string, wg *sync.W
 		status = "failed"
 	}
 
-	return status
+	fmt.Println(filename, ":", status)
 }
 
+// HandleDownload function to download file from s3
 func HandleDownload(filename string, bucketname string, filepath string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	status := "Successful"
